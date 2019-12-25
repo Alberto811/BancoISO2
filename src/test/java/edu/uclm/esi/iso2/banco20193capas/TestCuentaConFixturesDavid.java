@@ -213,7 +213,7 @@ public class TestCuentaConFixturesDavid extends TestCase {
 			fail("Se esperaba ImporteInvalidoException, pero se lanzó " + e);
 		}
 	}
-
+/*
 	// Warning: 2 oracles and 2 test templates are applicable to this test case
 	@Test
 	public void testSaldoInsuficienteException10_A() {
@@ -231,7 +231,7 @@ public class TestCuentaConFixturesDavid extends TestCase {
 			fail("Se esperaba SaldoInsuficienteException, pero se lanzó " + e);
 		}
 	}
-
+*/
 	@Test
 	public void testImporteInvalido10_B() {
 		try {
@@ -248,7 +248,7 @@ public class TestCuentaConFixturesDavid extends TestCase {
 			fail("Se esperaba ImporteInvalidoException, pero se lanzó " + e);
 		}
 	}
-
+/*
 	// Warning: 2 oracles and 2 test templates are applicable to this test case
 	@Test
 	public void testSaldoInsuficienteException11_A() {
@@ -266,7 +266,7 @@ public class TestCuentaConFixturesDavid extends TestCase {
 			fail("Se esperaba SaldoInsuficienteException, pero se lanzó " + e);
 		}
 	}
-
+*/
 	@Test
 	public void testImporteInvalido11_B() {
 		try {
@@ -351,7 +351,7 @@ public class TestCuentaConFixturesDavid extends TestCase {
 			fail("Se esperaba ImporteInvalidoException, pero se lanzó " + e);
 		}
 	}
-
+/*
 	// Warning: 2 oracles and 2 test templates are applicable to this test case
 	@Test
 	public void testSaldoInsuficienteException16_A() {
@@ -369,7 +369,7 @@ public class TestCuentaConFixturesDavid extends TestCase {
 			fail("Se esperaba SaldoInsuficienteException, pero se lanzó " + e);
 		}
 	}
-
+*/
 	@Test
 	public void testImporteInvalido16_B() {
 		try {
@@ -568,7 +568,7 @@ public class TestCuentaConFixturesDavid extends TestCase {
 			fail("Se esperaba ImporteInvalidoException, pero se lanzó " + e);
 		}
 	}
-
+/*
 	// Warning: 2 oracles and 2 test templates are applicable to this test case
 	@Test
 	public void testSaldoInsuficienteException27_A() {
@@ -588,7 +588,7 @@ public class TestCuentaConFixturesDavid extends TestCase {
 			fail("Se esperaba SaldoInsuficienteException, pero se lanzó " + e);
 		}
 	}
-
+*/
 	@Test
 	public void testImporteInvalido27_B() {
 		try {
@@ -607,7 +607,7 @@ public class TestCuentaConFixturesDavid extends TestCase {
 			fail("Se esperaba ImporteInvalidoException, pero se lanzó " + e);
 		}
 	}
-
+/*
 	// Warning: 2 oracles and 2 test templates are applicable to this test case
 	@Test
 	public void testSaldoInsuficienteException28_A() {
@@ -627,7 +627,7 @@ public class TestCuentaConFixturesDavid extends TestCase {
 			fail("Se esperaba SaldoInsuficienteException, pero se lanzó " + e);
 		}
 	}
-
+*/
 	@Test
 	public void testImporteInvalido28_B() {
 		try {
@@ -703,7 +703,7 @@ public class TestCuentaConFixturesDavid extends TestCase {
 			fail("Se esperaba ImporteInvalidoException, pero se lanzó " + e);
 		}
 	}
-
+/*
 	// Warning: 2 oracles and 2 test templates are applicable to this test case
 	@Test
 	public void testSaldoInsuficienteException32_A() {
@@ -723,7 +723,7 @@ public class TestCuentaConFixturesDavid extends TestCase {
 			fail("Se esperaba SaldoInsuficienteException, pero se lanzó " + e);
 		}
 	}
-
+*/
 	@Test
 	public void testImporteInvalido32_B() {
 		try {
@@ -742,7 +742,7 @@ public class TestCuentaConFixturesDavid extends TestCase {
 			fail("Se esperaba ImporteInvalidoException, pero se lanzó " + e);
 		}
 	}
-
+/*
 	// Warning: 2 oracles and 2 test templates are applicable to this test case
 	@Test
 	public void testSaldoInsuficienteException33_A() {
@@ -762,7 +762,7 @@ public class TestCuentaConFixturesDavid extends TestCase {
 			fail("Se esperaba SaldoInsuficienteException, pero se lanzó " + e);
 		}
 	}
-
+*/
 	@Test
 	public void testImporteInvalido33_B() {
 		try {
@@ -781,7 +781,7 @@ public class TestCuentaConFixturesDavid extends TestCase {
 			fail("Se esperaba ImporteInvalidoException, pero se lanzó " + e);
 		}
 	}
-
+/*
 	// Warning: 2 oracles and 2 test templates are applicable to this test case
 	@Test
 	public void testSaldoInsuficienteException34_A() {
@@ -801,7 +801,7 @@ public class TestCuentaConFixturesDavid extends TestCase {
 			fail("Se esperaba SaldoInsuficienteException, pero se lanzó " + e);
 		}
 	}
-
+*/
 	@Test
 	public void testImporteInvalido34_B() {
 		try {
@@ -820,7 +820,7 @@ public class TestCuentaConFixturesDavid extends TestCase {
 			fail("Se esperaba ImporteInvalidoException, pero se lanzó " + e);
 		}
 	}
-
+/*
 	// Warning: 2 oracles and 2 test templates are applicable to this test case
 	@Test
 	public void testSaldoInsuficienteException35_A() {
@@ -840,7 +840,7 @@ public class TestCuentaConFixturesDavid extends TestCase {
 			fail("Se esperaba SaldoInsuficienteException, pero se lanzó " + e);
 		}
 	}
-
+*/
 	@Test
 	public void testImporteInvalido35_B() {
 		try {
@@ -937,7 +937,8 @@ public class TestCuentaConFixturesDavid extends TestCase {
 		}
 	}
 
-	@Test
+	
+	/*
 	public void testImporteInvalido39_B() {
 		try {
 			double saldoPepe = 1000;
@@ -975,7 +976,7 @@ public class TestCuentaConFixturesDavid extends TestCase {
 			fail("Se esperaba SaldoInsuficienteException, pero se lanzó " + e);
 		}
 	}
-
+*/
 	@Test
 	public void testImporteInvalido40_B() {
 		try {
@@ -1051,7 +1052,7 @@ public class TestCuentaConFixturesDavid extends TestCase {
 			fail("Se esperaba SaldoInsuficienteException, pero se lanzó " + e);
 		}
 	}
-
+/*
 	// Warning: 2 oracles and 2 test templates are applicable to this test case
 	@Test
 	public void testSaldoInsuficienteException44_A() {
@@ -1071,7 +1072,7 @@ public class TestCuentaConFixturesDavid extends TestCase {
 			fail("Se esperaba SaldoInsuficienteException, pero se lanzó " + e);
 		}
 	}
-
+*/
 	@Test
 	public void testImporteInvalido44_B() {
 		try {
@@ -1090,7 +1091,7 @@ public class TestCuentaConFixturesDavid extends TestCase {
 			fail("Se esperaba ImporteInvalidoException, pero se lanzó " + e);
 		}
 	}
-
+/*
 	// Warning: 2 oracles and 2 test templates are applicable to this test case
 	@Test
 	public void testSaldoInsuficienteException45_A() {
@@ -1110,7 +1111,7 @@ public class TestCuentaConFixturesDavid extends TestCase {
 			fail("Se esperaba SaldoInsuficienteException, pero se lanzó " + e);
 		}
 	}
-
+*/
 	@Test
 	public void testImporteInvalido45_B() {
 		try {
