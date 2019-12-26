@@ -23,7 +23,8 @@ public class MovimientoCuenta {
 	public MovimientoCuenta() {
 	}
 
-	public MovimientoCuenta(Cuenta cuenta, double importe, String concepto) {
+	public MovimientoCuenta
+	(Cuenta cuenta, double importe, String concepto) {
 		this.importe = importe;
 		this.concepto = concepto;
 		this.cuenta = cuenta;
