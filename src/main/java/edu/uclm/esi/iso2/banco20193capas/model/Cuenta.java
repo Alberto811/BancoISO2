@@ -54,8 +54,9 @@ public class Cuenta {
 	 * ya se ha almacenado en la base de datos
 	 */
 	public void addTitular(Cliente cliente) throws CuentaYaCreadaException {
-		if (creada)
+		if (creada) {
 			throw new CuentaYaCreadaException();
+		}
 		this.titulares.add(cliente);
 	}
 	
@@ -71,8 +72,9 @@ public class Cuenta {
 
 	private void ingresar(double importe, String concepto)
 			throws ImporteInvalidoException {
-		if (importe<=0)
+		if (importe<=0) {
 			throw new ImporteInvalidoException(importe);
+		}
 		MovimientoCuenta movimiento = 
 				new MovimientoCuenta(this, importe, concepto);
 		Manager.getMovimientoDAO().save(movimiento);
@@ -93,10 +95,12 @@ public class Cuenta {
 		
 	private void retirar(double importe, String concepto)
 	throws ImporteInvalidoException, SaldoInsuficienteException {
-		if (importe<=0)
+		if (importe<=0) {
 			throw new ImporteInvalidoException(importe);
-		if (importe>getSaldo())
+		}
+		if (importe>getSaldo()) {
 			throw new SaldoInsuficienteException();
+		}
 		MovimientoCuenta movimiento = 
 				new MovimientoCuenta(this, -importe, concepto);
 		Manager.getMovimientoDAO().save(movimiento);
@@ -133,8 +137,9 @@ public class Cuenta {
 	(Long numeroCuentaDestino, double importe, String concepto)
 	throws CuentaInvalidaException, ImporteInvalidoException,
 	SaldoInsuficienteException {
-		if (this.getId().equals(numeroCuentaDestino))
+		if (this.getId().equals(numeroCuentaDestino)) {
 			throw new CuentaInvalidaException(numeroCuentaDestino);
+		}
 		this.retirar(importe, "Transferencia emitida");
 		double comision = Math.max(0.01*importe, 1.5);
 		this.retirar(comision, "Comisión por transferencia");
@@ -146,8 +151,9 @@ public class Cuenta {
 	throws CuentaInvalidaException {
 		Optional<Cuenta> optCuenta =
 			Manager.getCuentaDAO().findById(numero);
-		if (!optCuenta.isPresent())
+		if (!optCuenta.isPresent()) {
 			throw new CuentaInvalidaException(numero);
+		}
 		return optCuenta.get();
 	}
 
@@ -159,8 +165,9 @@ public class Cuenta {
 		List<MovimientoCuenta> mm =
 			Manager.getMovimientoDAO().findByCuentaId(this.id);
 		double saldo = 0.0;
-		for (MovimientoCuenta m : mm)
+		for (MovimientoCuenta m : mm) {
 			saldo = saldo + m.getImporte();
+		}
 		return saldo;
 	}
 
@@ -170,8 +177,9 @@ public class Cuenta {
 	 * Si no se ha asignado ningún titular a la cuenta
 	 */
 	public void insert() throws CuentaSinTitularesException {
-		if (this.titulares.isEmpty())
+		if (this.titulares.isEmpty()) {
 			throw new CuentaSinTitularesException();
+		}
 		this.creada = true;
 		Manager.getCuentaDAO().save(this);
 	}
@@ -190,18 +198,21 @@ public class Cuenta {
 	throws ClienteNoEncontradoException, ClienteNoAutorizadoException {
 		Optional<Cliente> optCliente =
 		Manager.getClienteDAO().findByNif(nif);
-		if (!optCliente.isPresent())
+		if (!optCliente.isPresent()) {
 			throw new ClienteNoEncontradoException(nif);
+		}
 		Cliente cliente = optCliente.get();
 		boolean encontrado = false;
-		for (Cliente titular : this.titulares)
+		for (Cliente titular : this.titulares) {
 			if (titular.getNif().equals(cliente.nif)) {
 				encontrado = true;
 				break;
 			}
+		}
 
-		if (!encontrado)
+		if (!encontrado) {
 			throw new ClienteNoAutorizadoException(nif, this.id);
+		}
 		TarjetaDebito tarjeta = new TarjetaDebito();
 		tarjeta.setCuenta(this);
 		tarjeta.setTitular(cliente);
@@ -226,17 +237,20 @@ public class Cuenta {
 	ClienteNoAutorizadoException {
 		Optional<Cliente> optCliente =
 		Manager.getClienteDAO().findByNif(nif);
-		if (!optCliente.isPresent())
+		if (!optCliente.isPresent()) {
 			throw new ClienteNoEncontradoException(nif);
+		}
 		Cliente cliente = optCliente.get();
 		boolean encontrado = false;
-		for (Cliente titular : this.titulares)
+		for (Cliente titular : this.titulares) {
 			if (titular.getNif().equals(cliente.nif)) {
 				encontrado = true;
 				break;
 			}
-		if (!encontrado)
+		}
+		if (!encontrado) {
 		throw new ClienteNoAutorizadoException(nif, this.id);
+		}
 		TarjetaCredito tarjeta = new TarjetaCredito();
 		tarjeta.setCuenta(this);
 		tarjeta.setTitular(cliente);

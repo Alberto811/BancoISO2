@@ -40,10 +40,12 @@ public class TarjetaCredito extends Tarjeta {
 			TarjetaBloqueadaException, PinInvalidoException {
 		comprobar(pin);
 		this.intentos = 0;
-		if (importe > getCreditoDisponible())
+		if (importe > getCreditoDisponible()) {
 			throw new SaldoInsuficienteException();
-		if (importe <= 0)
+		}
+		if (importe <= 0) {
 			throw new ImporteInvalidoException(importe);
+		}
 		MovimientoTarjetaCredito principal =
 			new MovimientoTarjetaCredito
 			(this, importe, "Retirada de efectivo");
@@ -82,15 +84,18 @@ public class TarjetaCredito extends Tarjeta {
 		SaldoInsuficienteException, ImporteInvalidoException {
 		comprobar(pin);
 		this.intentos = 0;
-		if (importe > getCreditoDisponible())
+		if (importe > getCreditoDisponible()) {
 			throw new SaldoInsuficienteException();
-		if (importe <= 0)
+		}
+		if (importe <= 0) {
 			throw new ImporteInvalidoException(importe);
+		}
 		SecureRandom dado = new SecureRandom();
 		int token = 0;
-		for (int i = 0; i <= 3; i++)
+		for (int i = 0; i <= 3; i++) {
 			token =
 		(int) (token + dado.nextInt(10) * Math.pow(10, i));
+		}
 		token = 1234;
 		this.compra = new Compra(importe, token);
 		return token;
@@ -118,10 +123,12 @@ public class TarjetaCredito extends Tarjeta {
 			TarjetaBloqueadaException, PinInvalidoException {
 		comprobar(pin);
 		this.intentos = 0;
-		if (importe > getCreditoDisponible())
+		if (importe > getCreditoDisponible()) {
 			throw new SaldoInsuficienteException();
-		if (importe <= 0)
+		}
+		if (importe <= 0) {
 			throw new ImporteInvalidoException(importe);
+		}
 		MovimientoTarjetaCredito principal = 
 		new 
 		MovimientoTarjetaCredito
@@ -160,9 +167,11 @@ public class TarjetaCredito extends Tarjeta {
 		List<MovimientoTarjetaCredito> mm =
 		Manager.getMovimientoTarjetaCreditoDAO()
 		.findByTarjetaId(this.id);
-		for (MovimientoTarjetaCredito m : mm)
-			if (!m.isLiquidado())
+		for (MovimientoTarjetaCredito m : mm) {
+			if (!m.isLiquidado()) {
 				gastos = gastos + m.getImporte();
+			}
+		}
 		return credito - gastos;
 	}
 
@@ -173,8 +182,9 @@ public class TarjetaCredito extends Tarjeta {
 	@Override
 	public void cambiarPin(int pinViejo, int pinNuevo)
 			throws PinInvalidoException {
-		if (this.pin != pinViejo)
+		if (this.pin != pinViejo) {
 			throw new PinInvalidoException();
+		}
 		this.pin = pinNuevo;
 		Manager.getTarjetaCreditoDAO().save(this);
 	}
