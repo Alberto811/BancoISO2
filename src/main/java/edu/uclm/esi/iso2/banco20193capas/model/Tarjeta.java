@@ -46,19 +46,22 @@ public abstract class Tarjeta {
 		this.intentos = 0;
 		SecureRandom dado = new SecureRandom();
 		pin = 0;
-		for (int i=0; i<=3; i++)
+		for (int i=0; i<=3; i++) {
 			pin = (int) (pin + dado.nextInt(10) * Math.pow(10, i));	
+		}
 	}
 	
 	protected void comprobar
 	(int pin)
 	throws TarjetaBloqueadaException, PinInvalidoException {
-		if (!this.isActiva())
+		if (!this.isActiva()) {
 			throw new TarjetaBloqueadaException();
+		}
 		if (this.pin!=pin) {
 			this.intentos++;
-			if (intentos == 3)
+			if (intentos == 3) {
 				bloquear();
+			}
 			throw new PinInvalidoException();
 		}		
 	}
