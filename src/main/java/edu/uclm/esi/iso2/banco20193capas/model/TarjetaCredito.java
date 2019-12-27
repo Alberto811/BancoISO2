@@ -21,7 +21,7 @@ public class TarjetaCredito extends Tarjeta {
 
     /**
      * Permite sacar dinero del cajero automático
-     * 
+     *
      * @param pin
      *            El pin que introduce el usuario
      * @param importe
@@ -29,7 +29,7 @@ public class TarjetaCredito extends Tarjeta {
      * @throws ImporteInvalidoException
      *             Si el {@code importe<=0}
      * @throws SaldoInsuficienteException
-     *             Si el crédito disponible de 
+     * Si el crédito disponible de
      *             la tarjeta es menor que el importe
      * @throws TarjetaBloqueadaException
      *             Si la tarjeta está bloqueada
@@ -37,8 +37,8 @@ public class TarjetaCredito extends Tarjeta {
      *             Si el pin introducido es distinto del pin de la tarjeta
      */
     @Override
-    public void sacarDinero(int pin, double importe) 
-        throws ImporteInvalidoException, SaldoInsuficienteException,
+    public void sacarDinero(int pin, double importe)
+    throws ImporteInvalidoException, SaldoInsuficienteException,
         TarjetaBloqueadaException, PinInvalidoException {
         comprobar(pin);
         this.intentos = 0;
@@ -48,12 +48,11 @@ public class TarjetaCredito extends Tarjeta {
         if (importe <= 0) {
             throw new ImporteInvalidoException(importe);
         }
-        MovimientoTarjetaCredito principal = 
-                new MovimientoTarjetaCredito(this, 
-                        importe, "Retirada de efectivo");
+        MovimientoTarjetaCredito principal =
+        new MovimientoTarjetaCredito(this, importe, "Retirada de efectivo");
         double comision = 3;
-        MovimientoTarjetaCredito mComision = 
-                new MovimientoTarjetaCredito(this, comision,
+        MovimientoTarjetaCredito mComision =
+        new MovimientoTarjetaCredito(this, comision,
                 "Comisión por retirada de efectivo");
         Manager.getMovimientoTarjetaCreditoDAO().save(principal);
         Manager.getMovimientoTarjetaCreditoDAO().save(mComision);
@@ -61,9 +60,9 @@ public class TarjetaCredito extends Tarjeta {
 
     /**
      * Inicia una compra por Internet, que debe confirmarse después (ver
-     * {@link #confirmarCompraPorInternet(int)}) mediante 
+     * {@link #confirmarCompraPorInternet(int)}) mediante
      * el token que devuelve este método
-     * 
+     *
      * @param pin
      *            El pin que introduce el usuario
      * @param importe
@@ -75,14 +74,14 @@ public class TarjetaCredito extends Tarjeta {
      * @throws PinInvalidoException
      *             Si el pin introducido es distinto del pin de la tarjeta
      * @throws SaldoInsuficienteException
-     *             Si el crédito disponible de la tarjeta 
-     *             es menor que el importe
+     *             Si el crédito disponible de la tarjeta
+     *es menor que el importe
      * @throws ImporteInvalidoException
      *             Si el importe menor o igual que 0
      */
     @Override
-    public Integer comprarPorInternet(int pin, double importe) 
-        throws TarjetaBloqueadaException, PinInvalidoException,
+    public Integer comprarPorInternet(int pin, double importe)
+    throws TarjetaBloqueadaException, PinInvalidoException,
         SaldoInsuficienteException, ImporteInvalidoException {
         comprobar(pin);
         this.intentos = 0;
@@ -104,7 +103,6 @@ public class TarjetaCredito extends Tarjeta {
 
     /**
      * Permite hacer un compra en un comercio
-     * 
      * @param pin
      *            El pin que introduce el usuario
      * @param importe
@@ -112,7 +110,7 @@ public class TarjetaCredito extends Tarjeta {
      * @throws ImporteInvalidoException
      *             Si el importe menor o igual que 0
      * @throws SaldoInsuficienteException
-     *             Si el crédito disponible 
+     *             Si el crédito disponible
      *             ({@link #getCreditoDisponible()}) de la
      *             tarjeta es menor que el importe
      * @throws TarjetaBloqueadaException
@@ -121,7 +119,7 @@ public class TarjetaCredito extends Tarjeta {
      *             Si el pin introducido es incorrecto
      */
     @Override
-    public void comprar(int pin, double importe) 
+    public void comprar(int pin, double importe)
         throws ImporteInvalidoException, SaldoInsuficienteException,
         TarjetaBloqueadaException, PinInvalidoException {
         comprobar(pin);
@@ -132,8 +130,8 @@ public class TarjetaCredito extends Tarjeta {
         if (importe <= 0) {
             throw new ImporteInvalidoException(importe);
         }
-        MovimientoTarjetaCredito principal = 
-                new MovimientoTarjetaCredito(this, 
+        MovimientoTarjetaCredito principal =
+                new MovimientoTarjetaCredito(this,
                         importe, "Retirada de efectivo");
         Manager.getMovimientoTarjetaCreditoDAO().save(principal);
     }
@@ -146,9 +144,9 @@ public class TarjetaCredito extends Tarjeta {
 
     public void liquidar() {
         double gastos = 0.0;
-        List<MovimientoTarjetaCredito> mm = 
-                Manager.getMovimientoTarjetaCreditoDAO()
-                .findByTarjetaId(this.id);
+        List<MovimientoTarjetaCredito> mm =
+                Manager.getMovimientoTarjetaCreditoDAO().
+                findByTarjetaId(this.id);
         for (MovimientoTarjetaCredito m : mm) {
             if (!m.isLiquidado()) {
                 gastos = gastos + m.getImporte();
@@ -165,7 +163,7 @@ public class TarjetaCredito extends Tarjeta {
 
     public Double getCreditoDisponible() {
         double gastos = 0.0;
-        List<MovimientoTarjetaCredito> mm = 
+        List<MovimientoTarjetaCredito> mm =
                 Manager.getMovimientoTarjetaCreditoDAO()
                 .findByTarjetaId(this.id);
         for (MovimientoTarjetaCredito m : mm) {
@@ -181,7 +179,7 @@ public class TarjetaCredito extends Tarjeta {
     }
 
     @Override
-    public void cambiarPin(int pinViejo, int pinNuevo) 
+    public void cambiarPin(int pinViejo, int pinNuevo)
             throws PinInvalidoException {
         if (this.pin != pinViejo) {
             throw new PinInvalidoException();

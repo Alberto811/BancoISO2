@@ -21,8 +21,8 @@ import edu.uclm.esi.iso2.banco20193capas.exceptions.SaldoInsuficienteException;
 /**
  * La clase representa una cuenta bancaria, que ha de tener al menos un {} que
  * sea titular.
- * 
- * 
+ *
+ *
  */
 @Entity
 public class Cuenta {
@@ -44,12 +44,11 @@ public class Cuenta {
     }
 
     public Cuenta(Integer id) {
-        this(new Long(id));
+        this(Long.valueOf(id));
     }
 
     /**
      * Añade un cliente a la lista de titulares de esta cuenta
-     * 
      * @param cliente
      *            El cliente que se añade a la lista de titulares
      * @throws CuentaYaCreadaException
@@ -64,7 +63,7 @@ public class Cuenta {
 
     /**
      * Realiza un ingreso en la cuenta
-     * 
+     *
      * @param importe
      *            El importe que se ingresa
      * @throws ImporteInvalidoException
@@ -74,19 +73,19 @@ public class Cuenta {
         this.ingresar(importe, "Ingreso de efectivo");
     }
 
-    private void ingresar(double importe, String concepto) 
-            throws ImporteInvalidoException {
+
+    private void ingresar(double importe, String concepto)
+    throws ImporteInvalidoException {
         if (importe <= 0) {
             throw new ImporteInvalidoException(importe);
         }
-        MovimientoCuenta movimiento = 
-              new MovimientoCuenta(this, importe, concepto);
+        MovimientoCuenta movimiento =
+        new MovimientoCuenta(this, importe, concepto);
         Manager.getMovimientoDAO().save(movimiento);
     }
 
     /**
      * Realiza una retirada de la cuenta
-     * 
      * @param importe
      *            El importe que se retira
      * @throws ImporteInvalidoException
@@ -94,12 +93,12 @@ public class Cuenta {
      * @throws SaldoInsuficienteException
      *             Si el importe mayor que getSaldo()
      */
-    public void retirar(double importe) 
+    public void retirar(double importe)
             throws ImporteInvalidoException, SaldoInsuficienteException {
-        this.retirar(importe, "Retirada de efectivo");
+    this.retirar(importe, "Retirada de efectivo");
     }
 
-    private void retirar(double importe, String concepto) 
+    private void retirar(double importe, String concepto)
             throws ImporteInvalidoException, SaldoInsuficienteException {
         if (importe <= 0) {
             throw new ImporteInvalidoException(importe);
@@ -107,31 +106,35 @@ public class Cuenta {
         if (importe > getSaldo()) {
             throw new SaldoInsuficienteException();
         }
-        MovimientoCuenta movimiento = 
+        MovimientoCuenta movimiento =
+
                 new MovimientoCuenta(this, -importe, concepto);
         Manager.getMovimientoDAO().save(movimiento);
     }
 
     /**
-     * Retira el importe de la cuenta, incluso aunque esta 
+
+     * Retira el importe de la cuenta, incluso aunque esta
      * no tenga saldo suficiente
-     * 
+     *
      * @param importe
      *            El importe que se retira
      * @param concepto
      *            El concepto del movimiento
      */
     public void retiroForzoso(double importe, String concepto) {
-        MovimientoCuenta movimiento = 
+        MovimientoCuenta movimiento =
+
                 new MovimientoCuenta(this, -importe, concepto);
         Manager.getMovimientoDAO().save(movimiento);
     }
 
     /**
      * Realiza una transferencia desde esta cuenta a la cuenta que se pasa como
-     * primer parámetro. Se cobra una comisión del 1%, 
+
+     * primer parámetro. Se cobra una comisión del 1%,
      * con un mínimo de 1.5 euros
-     * 
+     *
      * @param numeroCuentaDestino
      *            El id de la cuenta destino
      * @param importe
@@ -143,12 +146,13 @@ public class Cuenta {
      * @throws ImporteInvalidoException
      *             Si el importe es menor o igual que 0
      * @throws SaldoInsuficienteException
-     *             Si la cuenta no tiene saldo suficiente para 
+     *             Si la cuenta no tiene saldo suficiente para
      *             afrontar el importe y la comisión
      */
-    public void transferir(Long numeroCuentaDestino, 
+    public void transferir(Long numeroCuentaDestino,
             double importe, String concepto)
-            throws CuentaInvalidaException, 
+            throws CuentaInvalidaException,
+
             ImporteInvalidoException, SaldoInsuficienteException {
         if (this.getId().equals(numeroCuentaDestino)) {
             throw new CuentaInvalidaException(numeroCuentaDestino);
@@ -170,11 +174,11 @@ public class Cuenta {
 
     /**
      * Devuelve el saldo de la cuenta
-     * 
+     *
      * @return El saldo de la cuenta
      */
     public double getSaldo() {
-        List<MovimientoCuenta> mm = 
+        List<MovimientoCuenta> mm =
                 Manager.getMovimientoDAO().findByCuentaId(this.id);
         double saldo = 0.0;
         for (MovimientoCuenta m : mm) {
@@ -185,7 +189,7 @@ public class Cuenta {
 
     /**
      * Inserta la cuenta en la base de datos
-     * 
+     *
      * @throws CuentaSinTitularesException
      *             Si no se ha asignado ningún titular a la cuenta
      */
@@ -199,7 +203,7 @@ public class Cuenta {
 
     /**
      * Emite una tarjeta de débito asociada a esta cuenta
-     * 
+     *
      * @param nif
      *            NIF del cliente para el que se emite la tarjeta
      * @return La tarjeta de débito
@@ -235,7 +239,7 @@ public class Cuenta {
 
     /**
      * Emite una tarjeta de débito asociada a esta cuenta
-     * 
+     *
      * @param nif
      *            El nif del cliente para el cual se emite esta tarjeta
      * @param credito

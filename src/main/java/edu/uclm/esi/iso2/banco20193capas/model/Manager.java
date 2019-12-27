@@ -28,10 +28,11 @@ public class Manager {
     }
 
     @Autowired
-    private void loadDAO(CuentaDAO cuentaDao, 
-            MovimientoCuentaDAO movimientoDao, 
+
+    private void loadDAO(CuentaDAO cuentaDao,
+            MovimientoCuentaDAO movimientoDao,
             ClienteDAO clienteDAO,
-            MovimientoTarjetaCreditoDAO movimientoTCDAO, 
+            MovimientoTarjetaCreditoDAO movimientoTCDAO,
             TarjetaDebitoDAO tarjetaDebitoDAO,
             TarjetaCreditoDAO tarjetaCreditoDAO) {
         Manager.cuentaDAO = cuentaDao;

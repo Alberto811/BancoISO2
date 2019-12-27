@@ -1,4 +1,5 @@
-/**Versión 2.0.3 de mantenimiento**/
+
+/**Versión 2.0.4 de mantenimiento**/
 package edu.uclm.esi.iso2.banco20193capas.model;
 
 import javax.persistence.Entity;
@@ -9,7 +10,7 @@ import javax.persistence.ManyToOne;
 
 /**
  * Representa un movimiento en una cuenta bancaria
- * 
+ *
  */
 @Entity
 public class MovimientoCuenta {

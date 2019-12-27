@@ -21,7 +21,7 @@ import edu.uclm.esi.iso2.banco20193capas.exceptions.TokenInvalidoException;
 /**
  * Representa una tarjeta bancaria, bien de débito o bien de crédito. Una
  * {@code Tarjeta} está asociada a un {e} y a una {}.
- * 
+ *
  */
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -53,8 +53,9 @@ public abstract class Tarjeta {
         }
     }
 
-    protected void comprobar(int pin) 
-            throws TarjetaBloqueadaException, PinInvalidoException {
+    protected void comprobar(int pin)
+    throws TarjetaBloqueadaException, PinInvalidoException {
+
         if (!this.isActiva()) {
             throw new TarjetaBloqueadaException();
         }
@@ -71,21 +72,20 @@ public abstract class Tarjeta {
      * Permite confirmar una compra que se ha iniciado por Internet. El método
      * {@link #comprarPorInternet(int, double)} devuelve un token que debe ser
      * introducido en este método.
-     * 
      * @param token
-     *            El token que introduce el usuario. 
+     *            El token que introduce el usuario.
      *            Para que la compra se confirme,
      *            ha de coincidir con el token devuelto por
      *            {@link #comprarPorInternet(int, double)}
      * @throws TokenInvalidoException
-     *             Si el {@code token} introducido 
+     *             Si el {@code token} introducido
      *             es distinto del recibido desde
      *             {@link #comprarPorInternet(int, double)}
      * @throws ImporteInvalidoException
      *             Si el importe menor o irgual 0
      * @throws SaldoInsuficienteException
      *             Si el saldo de la cuenta asociada a la tarjeta (en el caso de
-     *             {@link TarjetaDebito}) es menor que 
+     *             {@link TarjetaDebito}) es menor que
      *             el importe, o si el crédito
      *             disponible en la tarjeta de crédito es menor que el importe
      * @throws TarjetaBloqueadaException
@@ -93,7 +93,9 @@ public abstract class Tarjeta {
      * @throws PinInvalidoException
      *             Si el pin que se introdujo es inválido
      */
-    public void confirmarCompraPorInternet(int token) 
+
+    public void confirmarCompraPorInternet(int token)
+
             throws TokenInvalidoException, ImporteInvalidoException,
             SaldoInsuficienteException, TarjetaBloqueadaException,
             PinInvalidoException {
@@ -139,7 +141,7 @@ public abstract class Tarjeta {
     }
 
     /**
-     * 
+     *
      * @return true si la tarjeta está activa; false si está bloqueada
      */
     public Boolean isActiva() {
@@ -150,23 +152,25 @@ public abstract class Tarjeta {
         this.activa = activa;
     }
 
-    public abstract void sacarDinero(int pin, double importe) 
+    public abstract void sacarDinero(int pin, double importe)
             throws ImporteInvalidoException,
-            SaldoInsuficienteException, 
+            SaldoInsuficienteException,
             TarjetaBloqueadaException, PinInvalidoException;
 
-    public abstract Integer comprarPorInternet(int pin, double importe) 
+    public abstract Integer comprarPorInternet(int pin, double importe)
+
             throws TarjetaBloqueadaException,
             PinInvalidoException,
             SaldoInsuficienteException, ImporteInvalidoException;
 
-    public abstract void comprar(int pin, double importe) 
+
+    public abstract void comprar(int pin, double importe)
             throws ImporteInvalidoException, SaldoInsuficienteException,
             TarjetaBloqueadaException, PinInvalidoException;
 
     /**
      * Permite cambiar el pin de la tarjeta
-     * 
+     *
      * @param pinViejo
      *            El pin actual
      * @param pinNuevo
@@ -174,6 +178,6 @@ public abstract class Tarjeta {
      * @throws PinInvalidoException
      *             Si el {@code pinViejo} es incorrecto
      */
-    public abstract void cambiarPin(int pinViejo, int pinNuevo) 
+    public abstract void cambiarPin(int pinViejo, int pinNuevo)
             throws PinInvalidoException;
 }

@@ -26,7 +26,8 @@ public class MovimientoTarjetaCredito {
     public MovimientoTarjetaCredito() {
     }
 
-    public MovimientoTarjetaCredito(TarjetaCredito tarjeta, 
+
+    public MovimientoTarjetaCredito(TarjetaCredito tarjeta,
             double importe, String concepto) {
         this.importe = importe;
         this.concepto = concepto;

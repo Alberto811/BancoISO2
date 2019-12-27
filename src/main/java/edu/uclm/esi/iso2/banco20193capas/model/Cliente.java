@@ -23,7 +23,7 @@ public class Cliente {
 
     /**
      * Crea un cliente
-     * 
+     *
      * @param nif
      *            NIF del cliente
      * @param nombre

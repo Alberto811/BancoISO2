@@ -15,7 +15,7 @@ public class TarjetaDebito extends Tarjeta {
 
     /**
      * Permite sacar dinero del cajero automático
-     * 
+     *
      * @param pin
      *            El pin que introduce el usuario
      * @param importe
@@ -23,7 +23,7 @@ public class TarjetaDebito extends Tarjeta {
      * @throws ImporteInvalidoException
      *             Si el {@code importe<=0}
      * @throws SaldoInsuficienteException
-     *             Si el saldo de la cuenta asociada 
+     * Si el saldo de la cuenta asociada
      *             a la tarjeta es menor que el
      *             importe
      * @throws TarjetaBloqueadaException
@@ -32,8 +32,8 @@ public class TarjetaDebito extends Tarjeta {
      *             Si el pin introducido es distinto del pin de la tarjeta
      */
     @Override
-    public void sacarDinero(int pin, double importe) 
-        throws ImporteInvalidoException, SaldoInsuficienteException,
+    public void sacarDinero(int pin, double importe)
+    throws ImporteInvalidoException, SaldoInsuficienteException,
         TarjetaBloqueadaException, PinInvalidoException {
         comprobar(pin);
         this.intentos = 0;
@@ -45,7 +45,6 @@ public class TarjetaDebito extends Tarjeta {
      * {@link #confirmarCompraPorInternet(int)})
      *  mediante el token que devuelve este
      * método
-     * 
      * @param pin
      *            El pin que introduce el usuario
      * @param importe
@@ -57,9 +56,8 @@ public class TarjetaDebito extends Tarjeta {
      * @throws PinInvalidoException
      *             Si el pin introducido es distinto del pin de la tarjeta
      * @throws SaldoInsuficienteException
-     *             Si el saldo de la cuenta asociada 
-     *             a la tarjeta es menor que el
-     *             importe
+     *             Si el saldo de la cuenta asociada a
+     *             la tarjeta es menor que el importe
      * @throws ImporteInvalidoException
      *             Si el importe menor o igual que 0
      */
@@ -81,24 +79,24 @@ public class TarjetaDebito extends Tarjeta {
 
     /**
      * Permite hacer un compra en un comercio
-     * 
+     *
      * @param pin
-     *            El pin que introduce el usuario
+     * El pin que introduce el usuario
      * @param importe
      *            El importe de la compra
      * @throws ImporteInvalidoException
      *             Si el importe menor o igual que 0
      * @throws SaldoInsuficienteException
-     *             Si el saldo de la cuenta asociada 
+     *             Si el saldo de la cuenta asociada
      *             ({@link Cuenta#getSaldo()}) a
-     *             la tarjeta es menor que el importe
+     * la tarjeta es menor que el importe
      * @throws TarjetaBloqueadaException
      *             Si la tarjeta está bloqueada
      * @throws PinInvalidoException
      *             Si el pin introducido es incorrecto
      */
     @Override
-    public void comprar(int pin, double importe) 
+    public void comprar(int pin, double importe)
             throws ImporteInvalidoException, SaldoInsuficienteException,
             TarjetaBloqueadaException, PinInvalidoException {
         comprobar(pin);
@@ -113,7 +111,7 @@ public class TarjetaDebito extends Tarjeta {
     }
 
     @Override
-    public void cambiarPin(int pinViejo, int pinNuevo) 
+    public void cambiarPin(int pinViejo, int pinNuevo)
             throws PinInvalidoException {
         if (this.pin != pinViejo) {
             throw new PinInvalidoException();
