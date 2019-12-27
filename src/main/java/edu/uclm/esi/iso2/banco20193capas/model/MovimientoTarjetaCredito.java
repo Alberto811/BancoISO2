@@ -1,3 +1,4 @@
+/**Versión 2.0.3 de mantenimiento**/
 package edu.uclm.esi.iso2.banco20193capas.model;
 
 import javax.persistence.Entity;
@@ -12,64 +13,64 @@ import javax.persistence.ManyToOne;
  */
 @Entity
 public class MovimientoTarjetaCredito {
-	@Id @GeneratedValue(strategy = GenerationType.AUTO) 
-	private Long id;
-	@ManyToOne
-	private TarjetaCredito tarjeta;
-	
-	private double importe;
-	private String concepto;
-	private boolean liquidado;
-	
-	public MovimientoTarjetaCredito() {
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @ManyToOne
+    private TarjetaCredito tarjeta;
 
-	public MovimientoTarjetaCredito
-	(TarjetaCredito tarjeta, double importe, String concepto) {
-		this.importe = importe;
-		this.concepto = concepto;
-		this.tarjeta = tarjeta;
-	}
+    private double importe;
+    private String concepto;
+    private boolean liquidado;
 
-	public Long getId() {
-		return id;
-	}
+    public MovimientoTarjetaCredito() {
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public MovimientoTarjetaCredito(TarjetaCredito tarjeta, 
+            double importe, String concepto) {
+        this.importe = importe;
+        this.concepto = concepto;
+        this.tarjeta = tarjeta;
+    }
 
-	public TarjetaCredito getTarjeta() {
-		return tarjeta;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setTarjeta(TarjetaCredito tarjeta) {
-		this.tarjeta = tarjeta;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public double getImporte() {
-		return importe;
-	}
+    public TarjetaCredito getTarjeta() {
+        return tarjeta;
+    }
 
-	public void setImporte(double importe) {
-		this.importe = importe;
-	}
+    public void setTarjeta(TarjetaCredito tarjeta) {
+        this.tarjeta = tarjeta;
+    }
 
-	public String getConcepto() {
-		return concepto;
-	}
+    public double getImporte() {
+        return importe;
+    }
 
-	public void setConcepto(String concepto) {
-		this.concepto = concepto;
-	}
+    public void setImporte(double importe) {
+        this.importe = importe;
+    }
 
-	public boolean isLiquidado() {
-		return liquidado;
-	}
+    public String getConcepto() {
+        return concepto;
+    }
 
-	public void setLiquidado(boolean liquidado) {
-		this.liquidado = liquidado;
-	}
-	
-	
+    public void setConcepto(String concepto) {
+        this.concepto = concepto;
+    }
+
+    public boolean isLiquidado() {
+        return liquidado;
+    }
+
+    public void setLiquidado(boolean liquidado) {
+        this.liquidado = liquidado;
+    }
+
 }
