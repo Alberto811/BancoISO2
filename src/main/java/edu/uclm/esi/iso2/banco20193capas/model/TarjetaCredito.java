@@ -1,4 +1,4 @@
-/**Versión 2.0.4 de mantenimiento**/
+/**Versión 2.0.3 de mantenimiento**/
 package edu.uclm.esi.iso2.banco20193capas.model;
 
 import java.security.SecureRandom;
@@ -29,7 +29,7 @@ public class TarjetaCredito extends Tarjeta {
      * @throws ImporteInvalidoException
      *             Si el {@code importe<=0}
      * @throws SaldoInsuficienteException
-     *             Si el crédito disponible de
+     * Si el crédito disponible de
      *             la tarjeta es menor que el importe
      * @throws TarjetaBloqueadaException
      *             Si la tarjeta está bloqueada
@@ -38,7 +38,7 @@ public class TarjetaCredito extends Tarjeta {
      */
     @Override
     public void sacarDinero(int pin, double importe)
-        throws ImporteInvalidoException, SaldoInsuficienteException,
+    throws ImporteInvalidoException, SaldoInsuficienteException,
         TarjetaBloqueadaException, PinInvalidoException {
         comprobar(pin);
         this.intentos = 0;
@@ -49,11 +49,10 @@ public class TarjetaCredito extends Tarjeta {
             throw new ImporteInvalidoException(importe);
         }
         MovimientoTarjetaCredito principal =
-        new MovimientoTarjetaCredito(this,
-        importe, "Retirada de efectivo");
+        new MovimientoTarjetaCredito(this, importe, "Retirada de efectivo");
         double comision = 3;
         MovimientoTarjetaCredito mComision =
-                new MovimientoTarjetaCredito(this, comision,
+        new MovimientoTarjetaCredito(this, comision,
                 "Comisión por retirada de efectivo");
         Manager.getMovimientoTarjetaCreditoDAO().save(principal);
         Manager.getMovimientoTarjetaCreditoDAO().save(mComision);
@@ -76,13 +75,13 @@ public class TarjetaCredito extends Tarjeta {
      *             Si el pin introducido es distinto del pin de la tarjeta
      * @throws SaldoInsuficienteException
      *             Si el crédito disponible de la tarjeta
-     *             es menor que el importe
+     *es menor que el importe
      * @throws ImporteInvalidoException
      *             Si el importe menor o igual que 0
      */
     @Override
     public Integer comprarPorInternet(int pin, double importe)
-        throws TarjetaBloqueadaException, PinInvalidoException,
+    throws TarjetaBloqueadaException, PinInvalidoException,
         SaldoInsuficienteException, ImporteInvalidoException {
         comprobar(pin);
         this.intentos = 0;
@@ -104,7 +103,6 @@ public class TarjetaCredito extends Tarjeta {
 
     /**
      * Permite hacer un compra en un comercio
-     *
      * @param pin
      *            El pin que introduce el usuario
      * @param importe
@@ -147,8 +145,8 @@ public class TarjetaCredito extends Tarjeta {
     public void liquidar() {
         double gastos = 0.0;
         List<MovimientoTarjetaCredito> mm =
-                Manager.getMovimientoTarjetaCreditoDAO()
-                .findByTarjetaId(this.id);
+                Manager.getMovimientoTarjetaCreditoDAO().
+                findByTarjetaId(this.id);
         for (MovimientoTarjetaCredito m : mm) {
             if (!m.isLiquidado()) {
                 gastos = gastos + m.getImporte();

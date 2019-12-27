@@ -21,6 +21,8 @@ import edu.uclm.esi.iso2.banco20193capas.exceptions.SaldoInsuficienteException;
 /**
  * La clase representa una cuenta bancaria, que ha de tener al menos un {} que
  * sea titular.
+ *
+ *
  */
 @Entity
 public class Cuenta {
@@ -42,12 +44,11 @@ public class Cuenta {
     }
 
     public Cuenta(Integer id) {
-        this(Long.valueOf(id));
+        this(new Long(id));
     }
 
     /**
      * Añade un cliente a la lista de titulares de esta cuenta
-     *
      * @param cliente
      *            El cliente que se añade a la lista de titulares
      * @throws CuentaYaCreadaException
@@ -73,18 +74,17 @@ public class Cuenta {
     }
 
     private void ingresar(double importe, String concepto)
-            throws ImporteInvalidoException {
+    throws ImporteInvalidoException {
         if (importe <= 0) {
             throw new ImporteInvalidoException(importe);
         }
         MovimientoCuenta movimiento =
-              new MovimientoCuenta(this, importe, concepto);
+        new MovimientoCuenta(this, importe, concepto);
         Manager.getMovimientoDAO().save(movimiento);
     }
 
     /**
      * Realiza una retirada de la cuenta
-     *
      * @param importe
      *            El importe que se retira
      * @throws ImporteInvalidoException
@@ -94,7 +94,7 @@ public class Cuenta {
      */
     public void retirar(double importe)
             throws ImporteInvalidoException, SaldoInsuficienteException {
-        this.retirar(importe, "Retirada de efectivo");
+    this.retirar(importe, "Retirada de efectivo");
     }
 
     private void retirar(double importe, String concepto)

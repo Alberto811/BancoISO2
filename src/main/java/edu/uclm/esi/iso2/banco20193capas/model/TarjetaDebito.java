@@ -23,7 +23,7 @@ public class TarjetaDebito extends Tarjeta {
      * @throws ImporteInvalidoException
      *             Si el {@code importe<=0}
      * @throws SaldoInsuficienteException
-     *             Si el saldo de la cuenta asociada
+     * Si el saldo de la cuenta asociada
      *             a la tarjeta es menor que el
      *             importe
      * @throws TarjetaBloqueadaException
@@ -33,7 +33,7 @@ public class TarjetaDebito extends Tarjeta {
      */
     @Override
     public void sacarDinero(int pin, double importe)
-        throws ImporteInvalidoException, SaldoInsuficienteException,
+    throws ImporteInvalidoException, SaldoInsuficienteException,
         TarjetaBloqueadaException, PinInvalidoException {
         comprobar(pin);
         this.intentos = 0;
@@ -56,8 +56,8 @@ public class TarjetaDebito extends Tarjeta {
      * @throws PinInvalidoException
      *             Si el pin introducido es distinto del pin de la tarjeta
      * @throws SaldoInsuficienteException
-     *             Si el saldo de la cuenta asociada
-     *             a la tarjeta es menor que el importe
+     *             Si el saldo de la cuenta asociada a
+     *             la tarjeta es menor que el importe
      * @throws ImporteInvalidoException
      *             Si el importe menor o igual que 0
      */
@@ -81,7 +81,7 @@ public class TarjetaDebito extends Tarjeta {
      * Permite hacer un compra en un comercio
      *
      * @param pin
-     *            El pin que introduce el usuario
+     * El pin que introduce el usuario
      * @param importe
      *            El importe de la compra
      * @throws ImporteInvalidoException
@@ -89,7 +89,7 @@ public class TarjetaDebito extends Tarjeta {
      * @throws SaldoInsuficienteException
      *             Si el saldo de la cuenta asociada
      *             ({@link Cuenta#getSaldo()}) a
-     *             la tarjeta es menor que el importe
+     * la tarjeta es menor que el importe
      * @throws TarjetaBloqueadaException
      *             Si la tarjeta está bloqueada
      * @throws PinInvalidoException

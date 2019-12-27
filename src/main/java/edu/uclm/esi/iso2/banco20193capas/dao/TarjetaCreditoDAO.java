@@ -1,9 +1,11 @@
-/**Versión 2.0.4 de mantenimiento**/
+/**Versión 2.0.3 de mantenimiento**/
 package edu.uclm.esi.iso2.banco20193capas.dao;
 
 import org.springframework.data.repository.CrudRepository;
 
 import edu.uclm.esi.iso2.banco20193capas.model.TarjetaCredito;
+
 public interface TarjetaCreditoDAO extends
 CrudRepository<TarjetaCredito, Long> {
+
 }

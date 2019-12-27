@@ -93,9 +93,9 @@ public abstract class Tarjeta {
      *             Si el pin que se introdujo es inválido
      */
     public void confirmarCompraPorInternet(int token)
-            throws ImporteInvalidoException,
+            throws TokenInvalidoException, ImporteInvalidoException,
             SaldoInsuficienteException, TarjetaBloqueadaException,
-            PinInvalidoException, TokenInvalidoException {
+            PinInvalidoException {
         if (token != this.compra.getToken()) {
             this.compra = null;
             throw new TokenInvalidoException();
@@ -139,8 +139,7 @@ public abstract class Tarjeta {
 
     /**
      *
-     *@return true si la tarjeta está activa;
-     *false si está bloqueada
+     * @return true si la tarjeta está activa; false si está bloqueada
      */
     public Boolean isActiva() {
         return activa;
