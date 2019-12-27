@@ -44,7 +44,7 @@ public class Cuenta {
     }
 
     public Cuenta(Integer id) {
-        this(new Long(id));
+        this(Long.valueOf(id));
     }
 
     /**
