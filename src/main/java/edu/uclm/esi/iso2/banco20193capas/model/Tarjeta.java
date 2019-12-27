@@ -1,3 +1,4 @@
+/**Versión 2.0.3 de mantenimiento**/
 package edu.uclm.esi.iso2.banco20193capas.model;
 
 import java.security.SecureRandom;
@@ -18,156 +19,161 @@ import edu.uclm.esi.iso2.banco20193capas.exceptions.TarjetaBloqueadaException;
 import edu.uclm.esi.iso2.banco20193capas.exceptions.TokenInvalidoException;
 
 /**
- * Representa una tarjeta bancaria, bien de débito o bien de crédito.
- * Una {@code Tarjeta} está asociada a un {e} y a una {}.
- * 
+ * Representa una tarjeta bancaria, bien de débito o bien de crédito. Una
+ * {@code Tarjeta} está asociada a un {e} y a una {}.
+ *
  */
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Tarjeta {
-	@Id @GeneratedValue(strategy = GenerationType.AUTO)
-	protected Long id;
-	
-	protected Integer pin;
-	protected Boolean activa;
-	protected Integer intentos;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    protected Long id;
 
-	@Transient
-	protected Compra compra;
-	
-	@ManyToOne
-	protected Cliente titular;
-	
-	@ManyToOne
-	protected Cuenta cuenta;
-	
-	public Tarjeta() {
-		activa = true;
-		this.intentos = 0;
-		SecureRandom dado = new SecureRandom();
-		pin = 0;
-		for (int i=0; i<=3; i++) {
-			pin = (int) (pin + dado.nextInt(10) * Math.pow(10, i));	
-		}
-	}
-	
-	protected void comprobar
-	(int pin)
-	throws TarjetaBloqueadaException, PinInvalidoException {
-		if (!this.isActiva()) {
-			throw new TarjetaBloqueadaException();
-		}
-		if (this.pin!=pin) {
-			this.intentos++;
-			if (intentos == 3) {
-				bloquear();
-			}
-			throw new PinInvalidoException();
-		}		
-	}
-	
-	/**
-	 * Permite confirmar una compra que se ha iniciado por Internet.
-	 * El método {@link #comprarPorInternet(int, double)} devuelve
-	 * un token que debe ser introducido en este método.
-	 * @param token	El token que introduce el usuario.
-	 * Para que la compra se confirme, ha de coincidir con el token
-	 * devuelto por {@link #comprarPorInternet(int, double)}
-	 * @throws TokenInvalidoException	Si el {@code token}
-	 * introducido es distinto del recibido desde
-	 * {@link #comprarPorInternet(int, double)}
-	 * @throws ImporteInvalidoException
-	 * Si el importe menor o irgual 0
-	 * @throws SaldoInsuficienteException
-	 * Si el saldo de la cuenta asociada a la tarjeta
-	 * (en el caso de {@link TarjetaDebito}) es menor que el importe, o 
-	 * si el crédito disponible en la tarjeta de crédito
-	 * es menor que el importe	
-	 * @throws TarjetaBloqueadaException
-	 * Si la tarjeta está bloqueada
-	 * @throws PinInvalidoException
-	 * Si el pin que se introdujo es inválido
-	 */
-	public void confirmarCompraPorInternet
-	(int token)
-		throws TokenInvalidoException, ImporteInvalidoException,
-		SaldoInsuficienteException, TarjetaBloqueadaException,
-		PinInvalidoException {
-		if (token!=this.compra.getToken()) {
-			this.compra = null;
-			throw new TokenInvalidoException();
-		}
-		this.comprar(this.pin, this.compra.getImporte());
-	}
+    protected Integer pin;
+    protected Boolean activa;
+    protected Integer intentos;
 
-	protected abstract void bloquear();
+    @Transient
+    protected Compra compra;
 
-	public Long getId() {
-		return id;
-	}
+    @ManyToOne
+    protected Cliente titular;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @ManyToOne
+    protected Cuenta cuenta;
 
-	public Integer getPin() {
-		return pin;
-	}
+    public Tarjeta() {
+        activa = true;
+        this.intentos = 0;
+        SecureRandom dado = new SecureRandom();
+        pin = 0;
+        for (int i = 0; i <= 3; i++) {
+            pin = (int) (pin + dado.nextInt(10) * Math.pow(10, i));
+        }
+    }
 
-	public void setPin(Integer pin) {
-		this.pin = pin;
-	}
+    protected void comprobar(int pin)
+    throws TarjetaBloqueadaException, PinInvalidoException {
+        if (!this.isActiva()) {
+            throw new TarjetaBloqueadaException();
+        }
+        if (this.pin != pin) {
+            this.intentos++;
+            if (intentos == 3) {
+                bloquear();
+            }
+            throw new PinInvalidoException();
+        }
+    }
 
-	public Cliente getTitular() {
-		return titular;
-	}
+    /**
+     * Permite confirmar una compra que se ha iniciado por Internet. El método
+     * {@link #comprarPorInternet(int, double)} devuelve un token que debe ser
+     * introducido en este método.
+     * @param token
+     *            El token que introduce el usuario.
+     *            Para que la compra se confirme,
+     *            ha de coincidir con el token devuelto por
+     *            {@link #comprarPorInternet(int, double)}
+     * @throws TokenInvalidoException
+     *             Si el {@code token} introducido
+     *             es distinto del recibido desde
+     *             {@link #comprarPorInternet(int, double)}
+     * @throws ImporteInvalidoException
+     *             Si el importe menor o irgual 0
+     * @throws SaldoInsuficienteException
+     *             Si el saldo de la cuenta asociada a la tarjeta (en el caso de
+     *             {@link TarjetaDebito}) es menor que
+     *             el importe, o si el crédito
+     *             disponible en la tarjeta de crédito es menor que el importe
+     * @throws TarjetaBloqueadaException
+     *             Si la tarjeta está bloqueada
+     * @throws PinInvalidoException
+     *             Si el pin que se introdujo es inválido
+     */
+    public void confirmarCompraPorInternet(int token)
+            throws ImporteInvalidoException,
+            SaldoInsuficienteException, TarjetaBloqueadaException,
+            PinInvalidoException, TokenInvalidoException {
+        if (token != this.compra.getToken()) {
+            this.compra = null;
+            throw new TokenInvalidoException();
+        }
+        this.comprar(this.pin, this.compra.getImporte());
+    }
 
-	public void setTitular(Cliente titular) {
-		this.titular = titular;
-	}
+    protected abstract void bloquear();
 
-	public Cuenta getCuenta() {
-		return cuenta;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setCuenta(Cuenta cuenta) {
-		this.cuenta = cuenta;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	/**
-	 * 
-	 * @return true si la tarjeta está activa; false si está bloqueada
-	 */
-	public Boolean isActiva() {
-		return activa;
-	}
+    public Integer getPin() {
+        return pin;
+    }
 
-	public void setActiva(Boolean activa) {
-		this.activa = activa;
-	}
+    public void setPin(Integer pin) {
+        this.pin = pin;
+    }
 
-	public abstract void sacarDinero(int pin, double importe)
-	throws ImporteInvalidoException, SaldoInsuficienteException,
-	TarjetaBloqueadaException, PinInvalidoException;
-	
-	public abstract Integer comprarPorInternet
-	(int pin, double importe)
-	throws TarjetaBloqueadaException, PinInvalidoException,
-	SaldoInsuficienteException, ImporteInvalidoException;
+    public Cliente getTitular() {
+        return titular;
+    }
 
-	public abstract void comprar
-	(int pin, double importe)
-	throws ImporteInvalidoException, SaldoInsuficienteException,
-	TarjetaBloqueadaException, PinInvalidoException;
+    public void setTitular(Cliente titular) {
+        this.titular = titular;
+    }
 
-	/**
-	 * Permite cambiar el pin de la tarjeta
-	 * @param pinViejo	El pin actual
-	 * @param pinNuevo	El pin nuevo 
-	 * (el que desea establecer el usuario)
-	 * @throws PinInvalidoException	
-	 * Si el {@code pinViejo} es incorrecto
-	 */
-	public abstract void cambiarPin
-	(int pinViejo, int pinNuevo) throws PinInvalidoException;
+    public Cuenta getCuenta() {
+        return cuenta;
+    }
+
+    public void setCuenta(Cuenta cuenta) {
+        this.cuenta = cuenta;
+    }
+
+    /**
+     *
+     *@return true si la tarjeta está activa;
+     *false si está bloqueada
+     */
+    public Boolean isActiva() {
+        return activa;
+    }
+
+    public void setActiva(Boolean activa) {
+        this.activa = activa;
+    }
+
+    public abstract void sacarDinero(int pin, double importe)
+            throws ImporteInvalidoException,
+            SaldoInsuficienteException,
+            TarjetaBloqueadaException, PinInvalidoException;
+
+    public abstract Integer comprarPorInternet(int pin, double importe)
+            throws TarjetaBloqueadaException,
+            PinInvalidoException,
+            SaldoInsuficienteException, ImporteInvalidoException;
+
+    public abstract void comprar(int pin, double importe)
+            throws ImporteInvalidoException, SaldoInsuficienteException,
+            TarjetaBloqueadaException, PinInvalidoException;
+
+    /**
+     * Permite cambiar el pin de la tarjeta
+     *
+     * @param pinViejo
+     *            El pin actual
+     * @param pinNuevo
+     *            El pin nuevo (el que desea establecer el usuario)
+     * @throws PinInvalidoException
+     *             Si el {@code pinViejo} es incorrecto
+     */
+    public abstract void cambiarPin(int pinViejo, int pinNuevo)
+            throws PinInvalidoException;
 }
