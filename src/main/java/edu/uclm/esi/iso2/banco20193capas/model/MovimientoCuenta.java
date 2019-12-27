@@ -1,3 +1,4 @@
+/**Versión 2.0.4 de mantenimiento**/
 package edu.uclm.esi.iso2.banco20193capas.model;
 
 import javax.persistence.Entity;
@@ -8,56 +9,57 @@ import javax.persistence.ManyToOne;
 
 /**
  * Representa un movimiento en una cuenta bancaria
- * 
+ *
  */
 @Entity
 public class MovimientoCuenta {
-	@Id @GeneratedValue(strategy = GenerationType.AUTO) 
-	private Long id;
-	@ManyToOne
-	private Cuenta cuenta;
-	
-	private double importe;
-	private String concepto;
-	
-	public MovimientoCuenta() {
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @ManyToOne
+    private Cuenta cuenta;
 
-	public MovimientoCuenta(Cuenta cuenta, double importe, String concepto) {
-		this.importe = importe;
-		this.concepto = concepto;
-		this.cuenta = cuenta;
-	}
+    private double importe;
+    private String concepto;
 
-	public Long getId() {
-		return id;
-	}
+    public MovimientoCuenta() {
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public MovimientoCuenta(Cuenta cuenta, double importe, String concepto) {
+        this.importe = importe;
+        this.concepto = concepto;
+        this.cuenta = cuenta;
+    }
 
-	public Cuenta getCuenta() {
-		return cuenta;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setCuenta(Cuenta cuenta) {
-		this.cuenta = cuenta;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public double getImporte() {
-		return importe;
-	}
+    public Cuenta getCuenta() {
+        return cuenta;
+    }
 
-	public void setImporte(double importe) {
-		this.importe = importe;
-	}
+    public void setCuenta(Cuenta cuenta) {
+        this.cuenta = cuenta;
+    }
 
-	public String getConcepto() {
-		return concepto;
-	}
+    public double getImporte() {
+        return importe;
+    }
 
-	public void setConcepto(String concepto) {
-		this.concepto = concepto;
-	}
+    public void setImporte(double importe) {
+        this.importe = importe;
+    }
+
+    public String getConcepto() {
+        return concepto;
+    }
+
+    public void setConcepto(String concepto) {
+        this.concepto = concepto;
+    }
 }
