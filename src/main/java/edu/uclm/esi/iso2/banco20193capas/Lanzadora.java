@@ -11,6 +11,7 @@ import edu.uclm.esi.iso2.banco20193capas.model.Cuenta;
 public class Lanzadora {
 
 	public static void main(String[] args) throws Exception {
+		System.out.println();
 		SpringApplication.run(Lanzadora.class, args);
 		
 		try {
